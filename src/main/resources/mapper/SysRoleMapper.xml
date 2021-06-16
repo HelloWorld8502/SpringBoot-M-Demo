@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.SysRoleMapper">
+  <resultMap id="BaseResultMap" type="com.test.entity.SysRole">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="roleName" jdbcType="VARCHAR" property="rolename" />
+    <result column="roleKey" jdbcType="VARCHAR" property="rolekey" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, roleName, roleKey
+  </sql>
+  <select id="selectRoleByUserId" resultType="com.test.entity.SysRole">
+    select 1;
+  </select>
+</mapper>
