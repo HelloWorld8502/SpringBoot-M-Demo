@@ -22,22 +22,20 @@ public class ResultMsg<T> {
         this.message = message;
         this.data = data;
     }
-    private ResultMsg()
-    {
+    private ResultMsg() {
 
     }
-    public static ResultMsg  success(Object data){
-        return new ResultMsg(0,"",data);
+    public static<T> ResultMsg<T>  success(T data){
+        return new ResultMsg<T>(0,"",data);
 
     }
 
-    public static ResultMsg error()
+    public static ResultMsg<String> error()
     {
-        return new ResultMsg(-1,"system error",null);
+        return new ResultMsg<String>(-1,"system error",null);
     }
 
-    public static ResultMsg error(TestException e)
-    {
-        return new ResultMsg(e.getErrCode(),e.getMessage(),null);
+    public static ResultMsg<String> error(TestException e) {
+        return new ResultMsg<String>(e.getErrCode(),e.getMessage(),null);
     }
 }

@@ -7,6 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * 使用代理标志 如需使用计算方法耗时代理 在方法上添加此注解
+ * @author root
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

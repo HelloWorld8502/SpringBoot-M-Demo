@@ -10,6 +10,6 @@
     id, roleName, roleKey
   </sql>
   <select id="selectRoleByUserId" resultType="com.test.entity.SysRole">
-    select 1;
+    select * from sys_role where user_id = #{userId,jdbcType=VARCHAR};
   </select>
 </mapper>

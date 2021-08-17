@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * SysRoleDAO继承基类
+ * @author root
  */
 @Mapper
 @Repository

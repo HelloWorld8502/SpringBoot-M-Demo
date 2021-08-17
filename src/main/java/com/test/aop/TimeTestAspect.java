@@ -26,7 +26,7 @@ public class TimeTestAspect {
     }
 
     @Around(value = "timeTest() && @annotation(time)")
-    public Object around(ProceedingJoinPoint pjp,TimeTest time) throws Throwable {
+    public Object around(ProceedingJoinPoint pjp, TimeTest time) throws Throwable {
         long date = System.currentTimeMillis();
         Object o = pjp.proceed();
         log.info("方法执行时间:"+(System.currentTimeMillis()-date));

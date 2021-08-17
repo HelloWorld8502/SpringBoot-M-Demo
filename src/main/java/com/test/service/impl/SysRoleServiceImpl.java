@@ -5,6 +5,7 @@ import com.test.entity.SysRole;
 import com.test.mapper.SysRoleMapper;
 import com.test.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,9 +18,9 @@ import java.beans.Transient;
  * @version: v1.0
  */
 @Service
-@Transactional
 public class SysRoleServiceImpl implements SysRoleService {
     @Autowired
+    @Lazy
     private SysRoleMapper sysRoleMapper;
 
     @Override

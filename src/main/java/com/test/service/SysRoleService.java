@@ -7,4 +7,5 @@ import com.test.entity.SysRole;
  */
 public interface SysRoleService {
     SysRole selectRoleByUserId(String userId);
+
 }
