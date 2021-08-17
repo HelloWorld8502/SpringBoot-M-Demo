@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @description: webSocket控制器
@@ -20,13 +21,17 @@ import java.io.IOException;
 @ServerEndpoint("/getDate")
 public class DateWebSocketController {
 
+    private static CopyOnWriteArrayList<Session> sessions = new CopyOnWriteArrayList<>();
+    private Session session;
     @OnOpen
     public void onOpen(Session session) {
 
+        sessions.add(session);
+        this.session = session;
         log.info("检测到新连接 SESSION ID:"+session.getId()+" SESSION:"+ session);
         WebSocketSendDateTask webSocketSendDateTask = SpringUtils.getBean(WebSocketSendDateTask.class);
 
-        webSocketSendDateTask.executeSendDateTime(session);
+        webSocketSendDateTask.executeSendDateTime(DateWebSocketController.sessions);
         log.info("线程创建完毕");
     }
 
@@ -38,6 +43,7 @@ public class DateWebSocketController {
         } catch (IOException e) {
             log.error("关闭WebSocket错误" + " SESSION ID:" + session.getId() + " SESSION:" + session + " 错误信息" + e.getMessage(), e);
         }
+        sessions.remove(session);
     }
 
     @OnError
@@ -58,7 +64,10 @@ public class DateWebSocketController {
     }
 
 
-    public static void asyncSendMsg(Session session, String msg)  {
-        session.getAsyncRemote().sendText(msg);
+//    public static void asyncSendMsg(Session session, String msg)  {
+//        session.getAsyncRemote().sendText(msg);
+//    }
+    public static void asyncSendMsg(String msg)  {
+        sessions.forEach(session -> session.getAsyncRemote().sendText(msg));
     }
 }

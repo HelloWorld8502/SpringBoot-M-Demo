@@ -27,7 +27,7 @@ public class ThreadPoolConfig {
         executor.setCorePoolSize(32);
         executor.setMaxPoolSize(256);
         executor.setQueueCapacity(512);
-        executor.setKeepAliveSeconds(180);
+        executor.setKeepAliveSeconds(0);
         executor.setThreadNamePrefix("webSocketSendTaskExecutor");
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.DiscardOldestPolicy());
         executor.setWaitForTasksToCompleteOnShutdown(true);
