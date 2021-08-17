@@ -22,12 +22,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class DateWebSocketController {
 
     private static CopyOnWriteArrayList<Session> sessions = new CopyOnWriteArrayList<>();
-    private Session session;
     @OnOpen
     public void onOpen(Session session) {
 
         sessions.add(session);
-        this.session = session;
         log.info("检测到新连接 SESSION ID:"+session.getId()+" SESSION:"+ session);
         WebSocketSendDateTask webSocketSendDateTask = SpringUtils.getBean(WebSocketSendDateTask.class);
 
