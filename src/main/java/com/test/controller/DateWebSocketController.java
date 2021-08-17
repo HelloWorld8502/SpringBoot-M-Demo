@@ -21,15 +21,15 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @ServerEndpoint("/getDate")
 public class DateWebSocketController {
 
-    private static CopyOnWriteArrayList<Session> sessions = new CopyOnWriteArrayList<>();
+    private static final CopyOnWriteArrayList<Session> SESSIONS = new CopyOnWriteArrayList<>();
     @OnOpen
     public void onOpen(Session session) {
 
-        sessions.add(session);
+        SESSIONS.add(session);
         log.info("检测到新连接 SESSION ID:"+session.getId()+" SESSION:"+ session);
         WebSocketSendDateTask webSocketSendDateTask = SpringUtils.getBean(WebSocketSendDateTask.class);
 
-        webSocketSendDateTask.executeSendDateTime(DateWebSocketController.sessions);
+        webSocketSendDateTask.executeSendDateTime(DateWebSocketController.SESSIONS);
         log.info("线程创建完毕");
     }
 
@@ -41,7 +41,7 @@ public class DateWebSocketController {
         } catch (IOException e) {
             log.error("关闭WebSocket错误" + " SESSION ID:" + session.getId() + " SESSION:" + session + " 错误信息" + e.getMessage(), e);
         }
-        sessions.remove(session);
+        SESSIONS.remove(session);
     }
 
     @OnError
@@ -66,6 +66,6 @@ public class DateWebSocketController {
 //        session.getAsyncRemote().sendText(msg);
 //    }
     public static void asyncSendMsg(String msg)  {
-        sessions.forEach(session -> session.getAsyncRemote().sendText(msg));
+        SESSIONS.forEach(session -> session.getAsyncRemote().sendText(msg));
     }
 }
