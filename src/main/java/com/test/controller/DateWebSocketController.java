@@ -34,6 +34,7 @@ public class DateWebSocketController {
     public void onClose(Session session) {
         try {
             session.close();
+            log.info("SESSION ID:" + session.getId() + "连接已关闭" + " SESSION:"+ session);
         } catch (IOException e) {
             log.error("关闭WebSocket错误" + " SESSION ID:" + session.getId() + " SESSION:" + session + " 错误信息" + e.getMessage(), e);
         }
